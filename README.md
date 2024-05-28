@@ -64,3 +64,10 @@ and
 hostname server for the server.
 ```
 we disconnect and reconnect to the instances for these changes to take effect.
+
+![alt text](images/5.5.png)
+
+On the `client` and `server` terminals we run the command:
+```
+sudo apt update
+```
