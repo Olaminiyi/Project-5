@@ -103,3 +103,84 @@ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 Replace "bind-address" **‘127.0.0.1’** to **‘0.0.0.0’** like this:
 
 ![alt text](images/5.12.png)
+
+To set up the mysql database in server that the client will be able to connect to, we run the following commands:
+```
+sudo mysql
+```
+this lauches us into the mysql database.
+
+Next we run the command:
+```
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';
+```
+we exit. Start the interactive script by running:
+```
+sudo mysql_secure_installation
+```
+
+At the prompt we put in the `password` we specified earlier i.e `PassWord.1`. To create a validated `password`, type `y`. Then choose the strength of the new password you want to create-at the prompt, we put in the new password.
+
+Type `y` at the following prompts to validate the changes.
+
+![alt text](images/5.13.png)
+
+![alt text](images/5.14.png)
+
+When you’re finished, log in to the MySQL console by typing:
+```
+sudo mysql -p
+```
+![alt text](images/5.15.png)
+
+
+To create a new database, run the following command from your MySQL console:
+```
+mysql> CREATE DATABASE `example_database`;
+```
+we replaced 'example_database' with 'test_database'.
+
+Now you can create a new user and grant him full privileges on the database you have just created.
+```
+mysql> CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+we replace **'example_user'** with **'solomon'** and **'password'** with the new password we just created i.e 'Sa4la2xa#'
+
+To give this user (i.e 'solomon') permission over the 'test_database' database:
+```
+mysql> GRANT ALL ON example_database.* TO 'solomon'@'%';
+```
+Then, we exit the mysql shell.
+
+![alt text](images/5.16.png)
+
+To test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
+```
+mysql -u solomon -p
+```
+at the prompt, we put in our password (i.e Sa4la2xa#). then run the command:
+```
+mysql> SHOW DATABASES;
+```
+![alt text](images/5.17.png)
+
+We should be able to access the database.
+
+> [!NOTE] 
+> If we are unable to connect to the server, we open the /etc/mysql/my.cnf on the server.
+```
+vim /etc/mysql/my.cnf
+```
+Check if we can see **bind-address = 127.0.0.1** if we cant find this, we go and open the **/etc/mysql/mysql.conf.d/ mysqld.cnf**.
+```
+vim /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+and comment out the bind-address = 127.0.0.1.
+
+i.e # bind-address = 127.0.0.1
+
+then restart the mysql server
+```
+sudo systemctl restart mysql
+```
+We have successfully deployed a fully functional mysql client-server setup.
