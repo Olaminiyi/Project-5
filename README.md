@@ -71,3 +71,18 @@ On the `client` and `server` terminals we run the command:
 ```
 sudo apt update
 ```
+![alt text](images/5.6.png)
+![alt text](images/5.7.png)
+
+On the `server terminal`, we install the `mysql server`.
+```
+sudo apt install mysql-server
+```
+![alt text](images/5.8.png)
+
+and on the `client terminal`, we install the `mysql client`.
+```
+sudo apt install mysql-client
+```
+![alt text](images/5.9.png)
+
