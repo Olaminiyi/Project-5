@@ -86,3 +86,20 @@ sudo apt install mysql-client
 ```
 ![alt text](images/5.9.png)
 
+We verify the status of mysql by running the command:
+```
+sudo apt systemctl status mysql
+```
+![alt text](images/5.10.png)
+
+By default, both of the `EC2 virtual servers` are located in the same local virtual network, so they can communicate to each other using `local IP addresses`. Use `mysql server's` local IP address to connect from `mysql client`. `MySQL` server uses **TCP port** `3306` by default, so you will have to open it by creating a new entry in **‘Inbound rules’** in **‘mysql server’** *Security Groups*. For extra security, **do not allow** `all` *IP addresses* to reach your **‘mysql server’** – allow access only to the specific local IP address of your **‘mysql client’**.
+
+![alt text](images/5.11.png)
+
+We need to configure **MySQL server** to allow connections from remote hosts.
+```
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+Replace "bind-address" **‘127.0.0.1’** to **‘0.0.0.0’** like this:
+
+![alt text](images/5.12.png)
