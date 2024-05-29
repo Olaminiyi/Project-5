@@ -57,12 +57,13 @@ This opens the hostname file. We then edit the content to suit the given names c
 
 We then run the commands on the client and server terminals respectively.
 ```
-hostname client for the client
+hostname client 
 ```
-and
+ for the client and
 ```
-hostname server for the server.
+hostname server 
 ```
+for the server.
 we disconnect and reconnect to the instances for these changes to take effect.
 
 ![alt text](images/5.5.png)
